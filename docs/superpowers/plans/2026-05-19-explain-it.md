@@ -714,3 +714,82 @@ spec. Skill `name:` values (`explain-it`, `explain-it-now`) are
 lowercase/hyphen, reserved-word-free, enforced by Task 1.
 
 No gaps found.
+
+---
+
+## Plan Revision R1 — writing-skills Iron Law integration (2026-05-19)
+
+`superpowers:writing-skills` governs T3–T6 (the shipped skill artifact).
+This revision SUPERSEDES Tasks 5 & 6 and AMENDS Task 1. Two defects the
+skill exposed:
+
+**Defect A — descriptions summarize workflow.** writing-skills: a
+description that summarizes the workflow makes Claude follow the
+description and skip the skill body. Descriptions MUST be triggering
+conditions only ("Use when..."), no process summary. Corrected
+descriptions below replace those in Tasks 5/6.
+
+**Defect B — Iron Law.** "NO SKILL WITHOUT A FAILING TEST FIRST."
+T5/T6 must run RED (sonnet subagent fails the scenario WITHOUT the
+skill, capture verbatim rationalizations) → GREEN (write skill, sonnet
+subagent now complies) → REFACTOR (close loopholes, re-test).
+
+### Amend Task 1: add description-quality gate to check_compliance.py
+
+Add a check: each `description` must start with `Use when` or `Use the
+moment`; and must NOT contain workflow-summary tokens
+(`Runs `, `Workflow`, `## P`, `-step path`, `phase`, `plan-approval`).
+Fail otherwise. Re-run; commit as "Add description-quality gate
+(writing-skills Defect A)".
+
+### Corrected descriptions (replace plan Tasks 5/6 frontmatter)
+
+`skills/explain-it/SKILL.md`:
+```
+description: Use when a user asks to be taught or walked through a technical concept they do not already know and is calm and not rushed — phrasings like "teach me", "explain how X works", "help me understand", "I'm not familiar with", "walk me through" — or explicitly invokes /explain-it. Also use when a concept is involved enough to need a planned multi-step lesson, not a one-off answer. Do not use for urgent or frustrated "I don't get it" moments, for peer-level discussion, or for state/option/decision requests.
+```
+
+`skills/explain-it-now/SKILL.md`:
+```
+description: Use the moment a user is frustrated, rushed, or stuck about not understanding something — triggers include "I don't understand", "I didn't understand a word", "still lost", "too long", "too much jargon", "rephrase", caps-lock or profanity aimed at a prior explanation, or explicit /explain-it-now. Also use when one concept needs an immediate plain-language answer with no setup. Do not use when the user is calm and wants a structured planned lesson, or wants peer-level depth.
+```
+
+The SKILL.md BODIES (everything below frontmatter) are unchanged from
+plan Tasks 5/6 — only the `description:` line is replaced.
+
+### Revised Task 5 — RED-GREEN-REFACTOR for skills/explain-it/SKILL.md
+
+- [ ] R5.1 RED: dispatch a sonnet subagent (background) given eval-01's
+  query and NO skill, instructed to teach difference-in-differences.
+  Capture: did it over-teach/spiral, skip baseline, skip a plan,
+  no tracking? Record verbatim behavior to `evals/red-explain-it.md`.
+- [ ] R5.2 GREEN: write `skills/explain-it/SKILL.md` (corrected
+  description + plan-Task-5 body). Run `python scripts/check_compliance.py`
+  — expect FAIL only on "found 1" (other skill absent), no defect for
+  this file.
+- [ ] R5.3 GREEN verify: dispatch a fresh sonnet subagent (background)
+  WITH `skills/explain-it/` + `references/` and eval-01 query. Score
+  vs eval-01 expected_behavior. Append to `evals/red-explain-it.md`.
+- [ ] R5.4 REFACTOR: for any expected_behavior the subagent missed,
+  tighten the SKILL.md (close the loophole), re-run R5.3 until
+  >=8/9 pass and no spiral. Commit
+  "Add skills/explain-it/SKILL.md (Iron Law RED-GREEN-REFACTOR)".
+
+### Revised Task 6 — RED-GREEN-REFACTOR for skills/explain-it-now/SKILL.md
+
+- [ ] R6.1 RED: sonnet subagent (background), eval-03 query, NO skill.
+  Record behavior to `evals/red-explain-it-now.md` (baseline: v1.1
+  already strong here — RED documents the no-skill default).
+- [ ] R6.2 GREEN: write `skills/explain-it-now/SKILL.md` (corrected
+  description + plan-Task-6 body). Run compliance — expect PASS (both
+  skills now present, descriptions valid).
+- [ ] R6.3 GREEN verify: fresh sonnet subagent WITH the skill +
+  references + eval-03 query. Must hit ZERO-ceremony + fast + v1.1
+  behavior (no regression). Append results.
+- [ ] R6.4 REFACTOR: close any ceremony-leak loophole; re-test until
+  eval-03 fully passes. Commit
+  "Add skills/explain-it-now/SKILL.md (Iron Law RED-GREEN-REFACTOR)".
+
+Tasks 7, 8, 9 proceed as written (T8 behavioral evals already align
+with the GREEN-verify subagent runs; T9 CLAUDE.md edit deferred to
+final report per scope boundary, repo still ships).
