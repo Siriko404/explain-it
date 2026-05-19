@@ -49,6 +49,13 @@ def check_skill(path):
         failures.append(f"{path}: description {len(desc)} chars > 1024")
     if "<" in desc and ">" in desc:
         failures.append(f"{path}: description appears to contain XML tags")
+    # writing-skills Defect A: description = WHEN to use, not workflow summary
+    if not re.match(r"Use (when|the moment)\b", desc):
+        failures.append(f"{path}: description must start with 'Use when' / 'Use the moment'")
+    workflow_tokens = ("Runs ", "Workflow", "## P", "-step path", "phase", "plan-approval")
+    hit = [t for t in workflow_tokens if t.lower() in desc.lower()]
+    if hit:
+        failures.append(f"{path}: description summarizes workflow (tokens {hit}); state triggers only")
     n_lines = len(text.splitlines())
     if n_lines > 500:
         failures.append(f"{path}: body {n_lines} lines > 500")
