@@ -69,6 +69,29 @@ Render the proposed path as a tree (see MOC format below) and ask, via
 AskUserQuestion: approve / amend. Do NOT teach until approved when
 N>=3. N=1 may proceed directly.
 
+**P3 plan output — REQUIRED and FORBIDDEN content:**
+
+The plan output MUST include this line verbatim, immediately under the
+node list:
+
+> One node = one big-picture chunk per turn. Verbal "yes" advances.
+> Confusion opens a sub-branch.
+
+The plan output MUST NOT include any per-node turn-budget promise. The
+following phrasings (and equivalents) are FORBIDDEN:
+- "as many turns as needed"
+- "as many focused turns as the concept requires"
+- "deep mastery requires multiple turns"
+- "until you fully grasp/master"
+- any list of per-node sub-stages such as "intuition → example →
+  formula → derivation → edge cases" rendered as a multi-turn checklist
+
+Why: in past runs the agent freelanced an open-ended turn budget into
+the P3 contract (e.g. "as many focused turns as the concept requires"),
+then honored that contract by overstaying on Node 1 across multiple
+turns instead of advancing on verbal yes. Locking the contract here
+closes the loophole.
+
 ### P4 — Teach (skeleton-not-script tree walk)
 
 Walk nodes in order. Deliver each node with the 10-rule protocol from
