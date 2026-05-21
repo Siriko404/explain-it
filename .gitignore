@@ -1,0 +1,19 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor junk
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local-only work
+scratch/
+notes-private/
+drafts/
+
+# Build artifacts (none expected, but reserved)
+dist/
+build/
