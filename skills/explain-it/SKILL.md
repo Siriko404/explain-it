@@ -1,9 +1,6 @@
 ---
 name: explain-it
 description: Use when user asks to be taught a technical concept ("teach me", "explain", "tutorial", "I don't understand", "rephrase simpler"), when user signals frustration with a prior explanation ("too long", "too much jargon", "wall of text"), or when user invokes /explain-it or /explain-it-now.
-author: Sina Soleimanipour
-version: 2.0.0
-license: MIT
 ---
 
 # Explain-it
@@ -103,22 +100,9 @@ Every chunk includes at least one non-prose visual element (ASCII diagram, boxed
 | Fire stop-and-check as plain text prompt | Loses the structured gate contract; user typing free-form breaks the deterministic walk | Rule 3 — every gate fires `AskUserQuestion` |
 | Generic gate options (*"No — too much jargon"*) | Forces user to type free-form anyway; defeats the AskUserQuestion gate | Rule 3 — predict chunk-specific confusion + branch-deeper options |
 
-## Pedagogy Basis + Explicit Exclusions
+## Pedagogy Basis
 
-**Adopted (evidence-strength noted):**
-
-- **Strong** — Cognitive Load Theory worked-examples (Sweller); concrete-first sequencing
-- **Strong** — Feynman Technique (sixth-grade-simplicity test)
-- **Strong** — Multimedia Learning (Mayer) — graphical organizers reduce extraneous load
-- **Moderate** — Diátaxis (Procida) — tutorial ≠ explanation distinction
-- **Moderate** — Carpentries one-idea-per-chunk pedagogy
-- **Original** — Zettelkasten-style tree topology applied to live tutoring
-
-**Explicitly rejected:**
-
-- VAK / "learning styles" matching (no robust evidence — Pashler et al., 2008)
-- Single-pass dump of "key concepts" lists as a substitute for teaching
-- "Adapt style to learner" without a scope-interview evidence base
+Adopted: Cognitive Load Theory (Sweller), Feynman Technique, Multimedia Learning (Mayer), Diátaxis, Carpentries pedagogy, zettelkasten tree topology (original). Explicitly rejects VAK / "learning styles" matching (Pashler et al., 2008). Full provenance + citations: `references/pedagogy.md`.
 
 ## Session Budget (Safety)
 
@@ -145,26 +129,9 @@ All of these mean: stop, return to the tree, fix the violation.
 
 ## References
 
-Mode files:
-
-- `modes/ceremony.md` — full `/explain-it` execution protocol (scope interview, plan-approval gate, full tree walk)
-- `modes/express.md` — `/explain-it-now` execution protocol (skip gate, single-pass tree walk)
-
-Reference material:
-
-- `references/visuals.md` — 9-pattern visualization catalog with rotation guidance
-- `tests/` — 6 baseline failure scenarios this skill must pass
-
-Pedagogy sources:
-
-- [Cognitive Load Theory practice guide — NSW Dept of Education](https://education.nsw.gov.au/content/dam/main-education/about-us/educational-data/cese/2017-cognitive-load-theory-practice-guide.pdf)
-- [Feynman Technique — Farnam Street](https://fs.blog/feynman-technique/)
-- [Diátaxis framework](https://diataxis.fr/)
-- [Pashler et al. 2008 — Learning Styles: Concepts and Evidence](https://journals.sagepub.com/doi/10.1111/j.1539-6053.2009.01038.x)
-- [Mayer — Multimedia Learning principles](https://www.cambridge.org/core/books/cambridge-handbook-of-multimedia-learning/8E317F6353F710E69BA62F4856D8FAE9)
-
-Competitive landscape (audited 2026-05):
-
-- [bevibing/socrates-skill](https://github.com/bevibing/socrates-skill) — Socratic-only single-mode skill
-- [DrCatHicks/learning-opportunities](https://github.com/DrCatHicks/learning-opportunities) — post-hoc exercise menu
-- [GarethManning/claude-education-skills](https://github.com/GarethManning/claude-education-skills) — educator-facing skill library
+- `modes/ceremony.md` — full `/explain-it` execution protocol
+- `modes/express.md` — `/explain-it-now` execution protocol
+- `references/visuals.md` — 9-pattern visualization catalog
+- `references/pedagogy.md` — evidence-strength tags + citations
+- `references/landscape.md` — competitive audit (2026-05) + differentiator claims
+- `tests/` — 7 baseline failure scenarios this skill must pass
