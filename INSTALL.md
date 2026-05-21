@@ -5,8 +5,8 @@ Two files to copy. Restart Claude Code.
 ## macOS / Linux
 
 ```bash
-git clone https://github.com/<your-username>/Explain-it.git
-cd Explain-it
+git clone https://github.com/Siriko404/explain-it.git
+cd explain-it
 
 cp -r skills/explain-it ~/.claude/skills/
 cp commands/explain-it.md ~/.claude/commands/
@@ -16,8 +16,8 @@ cp commands/explain-it-now.md ~/.claude/commands/
 ## Windows (PowerShell)
 
 ```powershell
-git clone https://github.com/<your-username>/Explain-it.git
-Set-Location Explain-it
+git clone https://github.com/Siriko404/explain-it.git
+Set-Location explain-it
 
 Copy-Item -Recurse skills/explain-it $env:USERPROFILE/.claude/skills/
 Copy-Item commands/explain-it.md $env:USERPROFILE/.claude/commands/
@@ -66,7 +66,7 @@ rm ~/.claude/commands/explain-it-now.md
 ## Update
 
 ```bash
-cd Explain-it
+cd explain-it
 git pull
 # Re-copy the files (same commands as install above)
 ```

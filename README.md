@@ -29,8 +29,8 @@ The skill also auto-activates on trigger phrases (*"teach me"*, *"I don't unders
 
 ```bash
 # Clone
-git clone https://github.com/<your-username>/Explain-it.git
-cd Explain-it
+git clone https://github.com/Siriko404/explain-it.git
+cd explain-it
 
 # Copy skill to your Claude Code skills dir
 cp -r skills/explain-it ~/.claude/skills/
@@ -111,4 +111,4 @@ MIT — see `LICENSE`.
 
 ## Author
 
-Sina Soleimanipour — [github.com/<your-handle>](https://github.com/) · [linkedin.com/in/<your-handle>](https://linkedin.com/)
+Sina Soleimanipour — [github.com/Siriko404](https://github.com/Siriko404)
