@@ -17,6 +17,7 @@ Each test file specifies:
 | TC4 | confusion-spawns-branch | Rule 4 | #21 |
 | TC5 | pre-teach-plan-gate | Rule 1 | #7 + #8 |
 | TC6 | spec-request-branch | Rule 4 | painpoint #6 |
+| TC7 | visual-rotation | Rule 5 | v1.1 DCF engagement-collapse |
 
 ## How to run
 

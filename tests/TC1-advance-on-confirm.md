@@ -15,12 +15,12 @@ Skill kept emitting more material on Node 1 — variations, examples, deeper sub
 
 ## v2 pass criterion
 
-On receiving "Yes, got it", the skill MUST:
+On receiving "Yes, got it" (or the user selecting the *"Yes — advance to Node 2 (Recommended)"* option from the AskUserQuestion gate — both count per `SKILL.md` Rule 3 affirmative-tokens chat fallback), the skill MUST:
 
 1. Stop emitting Node 1 material immediately.
 2. Open Node 2 with the same chunk contract (big-picture, ≤5 sentences, one visual, different pattern from Node 1's chunk).
 3. NOT include any Node 1 recap, summary, or "before we move on..." preamble.
-4. End Node 2's chunk with the same stop-and-check prompt: *"Got it? Yes / No / Branch deeper?"*
+4. End Node 2's chunk by firing the `AskUserQuestion` stop-and-check gate per `SKILL.md` Rule 3 — 4 chunk-tailored options: *"Yes — advance to Node 3 (Recommended)"* / *"No — `<predicted-confusion>`"* / *"Branch deeper — `<predicted-focus>`"* / *"Other / specify"*. The predicted confusion/focus text must be specific to Node 2's chunk content, not generic.
 
 ## Verdict
 
