@@ -13,6 +13,7 @@ desktop.ini
 scratch/
 notes-private/
 drafts/
+backups/
 
 # Build artifacts (none expected, but reserved)
 dist/
