@@ -2,9 +2,9 @@
 
 Reference for `explain-it` Rule 5 — *visual scaffold mandatory + rotate patterns*.
 
-Every teaching chunk must include at least one non-prose visual element. This catalog lists 9 patterns. Rotate through them — do not repeat the same pattern on two consecutive chunks of the same lesson.
+Every teaching chunk must include ≥1 non-prose visual element. Catalog lists 9 patterns. Rotate through them — don't repeat same pattern on two consecutive chunks of same lesson.
 
-When unsure which pattern to pick, choose the one that makes the relationship between elements most spatially obvious:
+When unsure which pattern to pick, choose one that makes relationship between elements most spatially obvious:
 
 | If the chunk shows… | Use pattern… |
 |---|---|
@@ -22,7 +22,7 @@ When unsure which pattern to pick, choose the one that makes the relationship be
 
 ## 1. Vertical flow diagram — sequential transformation
 
-Show a chain of operations on one stream of value.
+Show chain of operations on one stream of value.
 
 ```
    Revenue
@@ -38,7 +38,7 @@ Show a chain of operations on one stream of value.
 
 ## 2. Branch tree — one-to-many split
 
-Show a single source flowing to multiple recipients.
+Show single source flowing to multiple recipients.
 
 ```
         UFCF
@@ -51,6 +51,7 @@ Show a single source flowing to multiple recipients.
 ## 3. Side-by-side boxes — two methods, same answer
 
 Show parallel computations that should converge.
+
 
 ```
 ┌─ Method A ──┐    ┌─ Method B ──┐
@@ -123,21 +124,21 @@ More debt → more interest → bigger tax shield → lower WACC
 
 ## Rotation discipline
 
-The rule is not just *include a visual* — it is *rotate the visual style across chunks*. Five vertical flow diagrams in a row fragments engagement; the eye stops seeing them as scaffold and starts seeing them as background noise.
+Rule is not just *include visual* — it is *rotate visual style across chunks*. Five vertical flow diagrams in a row fragments engagement; eye stops seeing them as scaffold, starts seeing them as background noise.
 
-A simple heuristic: track the pattern used in the previous chunk. The next chunk must use a different pattern, even if the previous pattern would technically fit. Force the variety.
+Heuristic: track pattern used in previous chunk. Next chunk must use different pattern, even if previous pattern would technically fit. Force variety.
 
-If a lesson genuinely demands the same pattern twice (e.g., two sequential transformations), use a different formatting variant — change the arrow direction, swap horizontal for vertical, add a side annotation — so the eye registers it as a fresh element.
+If lesson genuinely demands same pattern twice (e.g., two sequential transformations), use different formatting variant — change arrow direction, swap horizontal for vertical, add side annotation — so eye registers it as fresh element.
 
 ## Anti-patterns
 
-- **Pure-prose chunk with no visual** — violates Rule 5. Insert at minimum a boxed identity or a causal-arrow chain; either takes one line.
-- **Repeating the same pattern on consecutive chunks** — the v1.1 diversity violation. Force rotation.
-- **Visual that duplicates the prose** — a bulleted restatement of what the prose already said is not a scaffold; it's redundancy. Visuals should show RELATIONSHIPS the prose cannot easily express (parallel structure, proportion, causal propagation).
-- **Decorative visual unrelated to the concept** — only include visuals that load-bear meaning. Decoration ≠ scaffold.
+- **Pure-prose chunk with no visual** — violates Rule 5. Insert at minimum a boxed identity or causal-arrow chain; either takes one line.
+- **Repeating same pattern on consecutive chunks** — v1.1 diversity violation. Force rotation.
+- **Visual that duplicates prose** — bulleted restatement of what prose already said is not scaffold; it's redundancy. Visuals should show RELATIONSHIPS prose can't easily express (parallel structure, proportion, causal propagation).
+- **Decorative visual unrelated to concept** — only include visuals that load-bear meaning. Decoration ≠ scaffold.
 
 ## Pedagogical basis
 
-Graphical organizers reduce extraneous cognitive load when they make relationships between elements spatially explicit (Mayer's multimedia learning principles; Sweller's Cognitive Load Theory worked-examples corollary). Pure prose forces the learner to construct the spatial relationships mentally, which competes with germane load for the concept itself.
+Graphical organizers reduce extraneous cognitive load when they make relationships between elements spatially explicit (Mayer's multimedia learning principles; Sweller's Cognitive Load Theory worked-examples corollary). Pure prose forces learner to construct spatial relationships mentally, competes with germane load for concept itself.
 
-The rotation requirement is empirical — derived from the v1.1 → v2 amendment, where the FINANCE-project DCF tutorial used 5 consecutive vertical flow diagrams and the user reported engagement collapse. Variety preserves the load-reducing effect.
+Rotation requirement is empirical. Variety preserves load-reducing scaffold effect; repeating same pattern causes it to recede into background noise.
