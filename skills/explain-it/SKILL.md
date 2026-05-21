@@ -131,7 +131,7 @@ Excuses agents construct under load. Each is forbidden — reality column shows 
 | "Concept is verbal — skip visual scaffold" | Rule 5 has no exception for verbal concepts. Boxed identity or causal-arrow chain takes one line, scaffolds anything. |
 | "Skipping Phase 3 approval gate just this once — user clearly approves the plan implicitly" | Phase 3 is determinism contract. Without it skill regresses to v1.1. NEVER skip. Implicit approval = no approval. |
 | "Re-walked Node 2 once already, user asks again — re-walk again, they need it" | Per-node re-walk cap = 1. Second re-walk fires alternatives gate (mark complete / specify concrete remaining question / Other). Re-walking same node twice signals chunk-rewrite or lesson-end, not more re-walk. |
-| "Child branch hit depth 3, user wants deeper — one more level won't hurt" | Depth cap = 3, hard. Beyond depth 3 fires max-depth gate. /explain-it is the right tool for full breadth; explain-it-now's whole point is bounded depth. |
+| "Child branch hit depth 3, user wants deeper — one more level won't hurt" | Depth cap = 3, hard. Beyond depth 3 fires max-depth gate offering: resolve at current depth, switch breadth, accept partial, or specify. Cap exists because at depth 4+ the tree loses navigability for the learner — both modes enforce it equally. |
 
 ## Red Flags — STOP and Re-plan
 
