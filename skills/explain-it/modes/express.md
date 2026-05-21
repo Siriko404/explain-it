@@ -39,9 +39,9 @@ For each node in order:
    - **No** → spawn child sub-branch Node N.1; announce *"Opening Node N.1 — `<focus>`."* Resolve, then announce *"Closing Node N.1. Back to Node N+1."*
    - **Branch deeper** → spawn child sub-branch Node N.k. Same announce-open + announce-close protocol.
 
-## Phase 3 — Compact Synthesis (optional)
+## Phase 3 — Compact Synthesis (conditional)
 
-If user wants closure, emit one-sentence + one-visual synthesis. If user already said "good, done" — stop. Express mode favors stopping early.
+Emit synthesis ONLY when: (a) plan was 3+ nodes AND (b) user did not signal closure on the last gate ("good", "done", "got it"). On 1-node plans → skip (single node IS the lesson). On user-signaled closure → stop, no synthesis. Otherwise emit one-sentence + one-visual synthesis. Express mode favors stopping early.
 
 ## Session-Budget Guard
 

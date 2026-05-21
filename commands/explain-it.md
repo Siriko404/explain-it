@@ -5,14 +5,4 @@ argument-hint: <concept>
 
 Invoke the `explain-it` skill via the Skill tool. Concept to teach: $ARGUMENTS
 
-Use ceremony mode — read `skills/explain-it/modes/ceremony.md` and follow it verbatim.
-
-Required phases in order:
-
-1. Scope interview (Phase 1) — seed question + optional baseline check
-2. Reason about complexity → emit plan tree (Phase 2)
-3. Plan-approval gate via AskUserQuestion (Phase 3) — do NOT skip
-4. Tree walk (Phase 4) — one chunk per node, big-picture first, advance on "yes", spawn child sub-branch on "no" or specification request
-5. Synthesis chunk (Phase 5) — integrate all nodes with one visual
-
-Honor the session-budget guard (15 chunks max). Honor the 5 core rules in `SKILL.md`. Use a different visualization pattern from `references/visuals.md` on every consecutive chunk.
+Use ceremony mode. The skill's `SKILL.md` Routing table directs the load of `modes/ceremony.md`; do not re-route here. Follow the loaded mode file verbatim — all phase sequencing, gate schemas, session budgets, and rule citations are owned by the skill, not by this command file.

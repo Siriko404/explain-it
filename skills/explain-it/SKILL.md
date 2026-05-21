@@ -69,6 +69,8 @@ Predicted text in options 2 and 3 MUST be chunk-specific, not generic. **Bad:** 
 
 *Affirmative tokens (chat fallback only):* if user types in chat instead of selecting gate option, "yes", "y", "yep", "ok", "okay", "got it", "sure", "sounds good", thumbs-up emoji = Yes. **Anything not on list is NOT Yes.** Blank reply, single punctuation mark, vague hedge ("kinda", "i guess", "ok i think"), partial phrase → treat as Other / specify. Re-fire gate: *"Was that Yes to advance, or did you want to branch? Pick one."* Don't solicit elaborate confirmation when real affirmative given. Don't preface next chunk with transition phrase or recap of prior node — open Node N+1's chunk directly.
 
+*Close-announcement carve-out.* Rule 4's child-branch close-announcement (*"Closing Node N.k. Back to Node N+1."*) is the tree-operation contract — NOT a transition preamble. It is the only pre-chunk text permitted before opening Node N+1's chunk when returning from a child branch. The "no preamble" clause above targets Yes-advance paths only (sibling-to-sibling), not child-branch-return paths.
+
 *Tiebreaker — Rule 3 vs Rule 4.* When single reply contains BOTH affirmative token AND specification or confusion signal (e.g., *"yes but more on formula"*, *"got it, but explain math step"*), **Rule 4 wins** — spawn child branch on specified sub-topic. Affirmative doesn't advance walk when spec request present in same message.
 
 *Harness compatibility — degraded mode.* If `AskUserQuestion` unavailable in host harness (non-Claude-Code environment), fire every gate as plain-text numbered-list prompt with same 4 options. Announce once at session start: *"Running in text-fallback mode — reply by option number."* 4-option contract preserved; only input surface degrades.

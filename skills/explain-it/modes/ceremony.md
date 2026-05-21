@@ -8,7 +8,7 @@ Follow protocol verbatim. Don't skip steps.
 
 ## Phase 1 — Scope Interview
 
-Before any planning, ask learner ONE question (via `AskUserQuestion` when available, else plain prompt).
+Before any planning, ask learner ONE question via `AskUserQuestion` (if harness lacks the tool, the degraded-mode fallback in `SKILL.md` Rule 3 applies; do NOT fire as ad-hoc plain prompt here).
 
 **Seed question** (borrowed from Khanmigo + vuciv tutoring patterns):
 
@@ -75,7 +75,9 @@ For each node in plan order:
 
 ## Phase 5 — Synthesis Chunk
 
-After last sibling node's "yes", emit ONE synthesis chunk:
+**1-node plan exception:** if the approved plan was 1-node, skip Phase 5 entirely. The single node IS the lesson. Acknowledge once: *"Node 1 complete."* and exit.
+
+For 3-node or 5-node plans, after last sibling node's "yes", emit ONE synthesis chunk:
 
 - One sentence: *"Here's the whole picture together."*
 - One visual that integrates all nodes (typically flow diagram or summary table)
@@ -102,7 +104,7 @@ If user has declined 2 chunks in a row ("stop", "skip", "not now"), suspend teac
 
 ## Hand-off to Express
 
-If mid-session user signals urgency ("just give me the answer", "skip the rest", "shortcut"), drop ceremony and switch to `modes/express.md` for remaining material. State switch in one line: *"Switching to express mode for the rest."*
+If mid-session user signals urgency ("just give me the answer", "skip the rest", "shortcut"), drop ceremony and switch to `modes/express.md` for remaining material. State switch in one line naming the unwalked remainder: *"Switching to express. Remaining: 2 nodes — `<mechanism>`, `<consequence>`. Going."* Do NOT re-walk already-confirmed nodes. Confirmed-node chunk count IS retired; express's 5-chunk budget starts fresh for the remainder.
 
 ## Anti-patterns — Ceremony-Specific
 

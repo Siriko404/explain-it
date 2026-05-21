@@ -5,15 +5,4 @@ argument-hint: <concept>
 
 Invoke the `explain-it` skill via the Skill tool. Concept to teach: $ARGUMENTS
 
-Use express mode — read `skills/explain-it/modes/express.md` and follow it verbatim.
-
-Required behavior:
-
-1. State the tree shape in one sentence (e.g., *"Quick walk: 3 nodes — setup, mechanism, consequence. Going."*) — no scope interview, no approval gate
-2. Walk the tree — one chunk per node, big-picture first, ≤5 prose sentences + one visual element each
-3. Advance on "yes". Spawn child sub-branch on "no" or specification request. Same chunk contract applies in branches.
-4. Stop at ≤5 chunks unless user explicitly extends
-
-Express mode is a contract about gates (skip them), NOT a license to compress the chunk-per-node rule. The 5 core rules in `SKILL.md` still apply.
-
-If the concept is too broad for ≤5 chunks (e.g., "explain the entire CFA Level 1 curriculum"), refuse express in one line and recommend `/explain-it` instead.
+Use express mode. The skill's `SKILL.md` Routing table directs the load of `modes/express.md`; do not re-route here. Follow the loaded mode file verbatim — shape-statement format, gate schema, 5-chunk budget, refuse-on-too-broad threshold, and hand-off-to-ceremony protocol are owned by the skill, not by this command file.
