@@ -4,6 +4,8 @@ Loaded by `explain-it` SKILL.md when user invokes `/explain-it <concept>` or act
 
 Follow protocol verbatim. Don't skip steps.
 
+**Iron rule:** Violating letter of these steps = violating spirit of explain-it. No spirit-compliant shortcuts. Rationalizations to skip a step = re-read `SKILL.md` Rationalization Table.
+
 ## Phase 1 — Scope Interview
 
 Before any planning, ask learner ONE question (via `AskUserQuestion` when available, else plain prompt).
@@ -104,13 +106,13 @@ If mid-session user signals urgency ("just give me the answer", "skip the rest",
 
 ## Anti-patterns — Ceremony-Specific
 
-- **Skipping scope interview because user "obviously" wants topic** — costs one question, saves wasted chunk.
-- **Skipping plan-approval gate "to save time"** — gate IS determinism contract; without it skill regresses to v1.1.
-- **Emitting 2-chunk Node 1 because "it needs more"** — that's child branch (Node 1.1), not longer chunk.
-- **Forgetting to vary visual pattern across chunks** — engagement collapses (v1.1 Rule 8 diversity violation).
-- **Treating "No" as request to add more material** — "No" means spawn simpler child, not amplify parent.
+- **Skipping scope interview because user "obviously" wants topic** — **NEVER skip.** Phase 1 skip permitted ONLY when initial message explicitly names sub-angle (definition / mechanism / use-case / failure-mode). "Obviously" without explicit naming = guessing. No trade-off.
+- **Skipping plan-approval gate "to save time"** — **NEVER skip.** Phase 3 gate IS determinism contract; without it skill regresses to v1.1. No exceptions for "short concept" or "user clearly approves implicitly". No trade-off.
+- **Emitting 2-chunk Node 1 because "it needs more"** — that's child branch (Node 1.1), not longer chunk. 2-chunk parent node = Rule 2 violation. No trade-off.
+- **Forgetting to vary visual pattern across chunks** — engagement collapses (v1.1 Rule 8 diversity violation). Rotate or change formatting variant; never repeat pattern consecutively.
+- **Treating "No" as request to add more material** — "No" means spawn simpler child, not amplify parent. Rule 4 violation. No trade-off.
 - **Treating "Yes" as license for victory-lap recap of prior node** — "Yes" means advance, full stop. No transition preamble. No "Great, now that you understand X, let's move to Y..." opener.
-- **Silently branching without announcing open/close** — verbal naming IS tree-operation contract (see `SKILL.md` Rule 4). Child branch learner can't see = not child branch.
+- **Silently branching without announcing open/close** — verbal naming IS tree-operation contract (see `SKILL.md` Rule 4). Child branch learner can't see = not child branch. No exceptions.
 
 ## Return to SKILL.md
 

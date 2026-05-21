@@ -11,6 +11,8 @@ Deterministic teaching protocol. Default LLM explanations diverge, spiral, over-
 
 **Core invariant:** lesson IS tree. Every chunk = tree operation — root, advance to sibling, descend to child. No exception.
 
+**Iron rule:** Violating letter of these rules = violating spirit of these rules. No spirit-compliant shortcuts. If you can rationalize skipping a step ("just this once", "user obviously wants X", "saves time"), you are rationalizing — re-read Red Flags + Rationalization Table below.
+
 ## When to Use
 
 **Activate when:**
@@ -111,6 +113,23 @@ Max **15 chunks per session** to prevent pestering. After 2 explicit user declin
 ## Deactivation
 
 User says "stop explain-it", "normal mode", "I know this already" → revert immediately to standard explanation style. Acknowledge in one line.
+
+## Rationalization Table
+
+Excuses agents construct under load. Each is forbidden — reality column shows why.
+
+| Excuse | Reality |
+|---|---|
+| "Concept is short — skip plan tree" | Rule 1 has no size exception. Short ≠ atomic. Atomic = 1-node plan, still tree. |
+| "User obviously wants X — skip scope interview" | Phase 1 skip is permitted ONLY when initial message explicitly names sub-angle (definition/mechanism/use-case/failure-mode). "Obviously" without explicit naming = guessing. Guess wrong = wasted chunk. |
+| "User said yes-ish ('kinda', 'i guess') — advance" | Affirmative-tokens list is closed. Anything not on list = Other / re-fire gate. Vague ≠ Yes. |
+| "User asked deeper, just answer inline — branch ceremony wastes time" | Inline answer breaks tree topology. Spec request → named child branch always. The 4-line "Opening Node N.k / chunk / Closing Node N.k" overhead IS the contract. |
+| "All 9 visual patterns used in this lesson — repeat one, learner won't notice" | Learner DOES notice; engagement collapses (v1.1 amendment evidence). Vary formatting (orientation, annotation) before repeating pattern. |
+| "User confused — give them more material to clarify" | Adding material = Rule 4 violation. Confusion → spawn simpler-scope child, not amplify parent. |
+| "Concept is verbal — skip visual scaffold" | Rule 5 has no exception for verbal concepts. Boxed identity or causal-arrow chain takes one line, scaffolds anything. |
+| "Skipping Phase 3 approval gate just this once — user clearly approves the plan implicitly" | Phase 3 is determinism contract. Without it skill regresses to v1.1. NEVER skip. Implicit approval = no approval. |
+| "Re-walked Node 2 once already, user asks again — re-walk again, they need it" | Per-node re-walk cap = 1. Second re-walk fires alternatives gate (mark complete / specify concrete remaining question / Other). Re-walking same node twice signals chunk-rewrite or lesson-end, not more re-walk. |
+| "Child branch hit depth 3, user wants deeper — one more level won't hurt" | Depth cap = 3, hard. Beyond depth 3 fires max-depth gate. /explain-it is the right tool for full breadth; explain-it-now's whole point is bounded depth. |
 
 ## Red Flags — STOP and Re-plan
 

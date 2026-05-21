@@ -6,6 +6,8 @@ Same tree topology as ceremony, minus scope-interview and plan-approval gate. Sp
 
 Follow protocol verbatim.
 
+**Iron rule:** Violating letter of these steps = violating spirit of express. "Express is fast so I'll skip the gate" = rationalization. Skip = re-read `SKILL.md` Rationalization Table.
+
 ## Phase 1 — State Shape, Skip Gate
 
 In ONE sentence, declare what you're about to teach and how many nodes:
@@ -66,10 +68,10 @@ If user signals they want depth mid-express ("actually, walk me through this pro
 
 ## Anti-patterns — Express-Specific
 
-- **Skipping scope shape statement** — even express announces tree shape; otherwise user can't anticipate walk.
-- **Packing 2 nodes into 1 chunk because "it's express"** — express speeds up gates, not chunk contract.
-- **Dropping visual scaffold "to be quick"** — visual IS scaffold; prose alone fails. Use compact pattern (boxed identity, causal arrow) if you need speed.
-- **Continuing past 5 chunks without budget check** — express is contract about scope, not free pass.
+- **Skipping scope shape statement** — **NEVER skip.** Even express announces tree shape; otherwise user can't anticipate walk. No trade-off.
+- **Packing 2 nodes into 1 chunk because "it's express"** — express speeds up gates only. Chunk contract = same as ceremony (≤5 sentences + 1 visual). No trade-off.
+- **Dropping visual scaffold "to be quick"** — visual IS scaffold; prose alone fails. Use compact pattern (boxed identity, causal arrow) if you need speed. No skipping.
+- **Continuing past 5 chunks without budget check** — express is contract about scope. Past 5 chunks = budget gate fires. No free pass.
 
 ## Return to SKILL.md
 
