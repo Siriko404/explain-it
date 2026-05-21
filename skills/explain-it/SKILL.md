@@ -68,7 +68,11 @@ After each chunk, fire an `AskUserQuestion` gate (the *stop-and-check gate*). On
 
 The predicted text in options 2 and 3 MUST be chunk-specific, not generic. **Bad:** *"No — too much jargon."* **Good:** *"No — the omitted-variable-bias formula lost me."* If you cannot name a specific confusion source, the chunk is too vague — rewrite the chunk before firing the gate.
 
-*Affirmative tokens (chat fallback only):* if the user types in chat instead of selecting a gate option, "yes", "y", "yep", "ok", "okay", "got it", "sure", "sounds good", a thumbs-up emoji, or any clear affirmative all count as Yes. Do not solicit a more elaborate confirmation. Do not preface the next chunk with a transition phrase or a recap of the prior node — open Node N+1's chunk directly.
+*Affirmative tokens (chat fallback only):* if the user types in chat instead of selecting a gate option, "yes", "y", "yep", "ok", "okay", "got it", "sure", "sounds good", a thumbs-up emoji are all Yes. **Anything not on this list is NOT a Yes.** A blank reply, a single punctuation mark, a vague hedge ("kinda", "i guess", "ok i think"), or a partial phrase is treated as Other / specify — re-fire the gate with: *"Was that a Yes to advance, or did you want to branch? Pick one."* Do not solicit a more elaborate confirmation when a real affirmative is given, and do not preface the next chunk with a transition phrase or a recap of the prior node — open Node N+1's chunk directly.
+
+*Tiebreaker — Rule 3 vs Rule 4.* When a single reply contains BOTH an affirmative token AND a specification or confusion signal (e.g., *"yes but more on the formula"*, *"got it, but explain the math step"*), **Rule 4 wins** — spawn a child branch on the specified sub-topic. An affirmative does not advance the walk when a spec request is present in the same message.
+
+*Harness compatibility — degraded mode.* If `AskUserQuestion` is unavailable in the host harness (non-Claude-Code environment), fire every gate as a plain-text numbered-list prompt with the same 4 options. Announce once at session start: *"Running in text-fallback mode — reply by option number."* The 4-option contract is preserved; only the input surface degrades.
 
 **Rule 4 — Confusion → spawn child sub-branch.**
 On "no" / "don't understand" / "explain more" / a specification request → open a child node (e.g., Node 2 → Node 2.1) with simpler scope or deeper focus. Do NOT rephrase in place. Resolve the child, then return to the parent's next sibling. Tree topology IS the determinism.
@@ -76,6 +80,10 @@ On "no" / "don't understand" / "explain more" / a specification request → open
 *Announce the branch operation aloud by name* — say *"Opening Node N.k — `<focus>`."* when descending, and *"Closing Node N.k. Back to Node N+1."* when returning. The verbal naming IS the tree-operation contract; silent branches do not count as compliance.
 
 **N and N+1 are placeholder variables — always substitute the actual node numbers.** When closing Node 2.1 in a 3-node plan, say *"Closing Node 2.1. Back to Node 3."* — not the literal string *"Back to Node N+1."* Same substitution rule for the opening announcement.
+
+*Depth cap.* Child branches are limited to **depth 3** — Node 2.1.1 is the deepest permitted. At depth 3, an additional confusion or spec-request response does NOT spawn Node 2.1.1.1. Instead, fire `AskUserQuestion` with: *"At max branch depth. Pick: (a) resolve at current depth, (b) switch to `/explain-it` for full breadth, (c) accept partial and return to parent, (d) Other / specify."*
+
+*Phase 5 synthesis exception.* The Phase 5 synthesis-chunk re-emit on "No" (see `modes/ceremony.md` Phase 5) is the **single authorized exception** to the "Do NOT rephrase in place" rule. All other "No" responses in the tree walk spawn child branches per Rule 4 — no exceptions.
 
 **Rule 5 — Visual scaffold mandatory + rotate patterns.**
 Every chunk includes at least one non-prose visual element (ASCII diagram, boxed identity, comparison table, timeline, causal arrow, stacked block, decision tree, branch tree, side-by-side compare). Rotate patterns chunk-to-chunk — do not repeat the same visual style consecutively. Full catalog: `references/visuals.md`.

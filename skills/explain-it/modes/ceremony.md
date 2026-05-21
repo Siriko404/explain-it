@@ -14,11 +14,15 @@ Before any planning, ask the learner ONE question (via `AskUserQuestion` when av
 
 You MAY skip the seed question ONLY when the user's initial message explicitly names a sub-angle (definition / mechanism / use-case / failure-mode). State the assumption inline: *"Assuming you want the [A/B/C] angle — correct if wrong."* The Phase 3 approval gate is NEVER skippable, no matter how well-framed the initial message is.
 
-**Also confirm baseline ONLY when the concept requires a prerequisite:**
+**Also confirm baseline ONLY when the concept requires a prerequisite.**
+
+*Prereq trigger criterion:* a concept requires a prerequisite check if (a) its mechanism cannot be stated without naming a sub-concept the learner has not confirmed knowing, AND (b) that sub-concept is itself teachable as a 1-node lesson. When in doubt, check — one question costs less than a wasted chunk.
 
 > "Do you already know `<prerequisite>`? Yes / No / Sort-of?"
 
-Do not ask more than 2 questions in the scope interview. More = friction.
+*Handler when learner answers No:* silently prepend the prerequisite as Node 1 of the plan tree (shift all planned nodes down by one). Note the expansion at Phase 2's ASCII tree — the user sees the modification at the Phase 3 approval gate and can amend it there. If the prerequisite itself has unmet prerequisites, cap at one level of prepend and flag the deeper gap inline: *"Note: `<deeper-prereq>` may also be unfamiliar — flag if needed."*
+
+Do not ask more than 2 questions in the scope interview. More = friction. (The prereq handler is a silent plan amendment, not a third question.)
 
 ## Phase 2 — Reason About Complexity → Emit Plan Tree
 
@@ -65,7 +69,7 @@ For each node in plan order:
    - **Yes** (or any affirmative token per `SKILL.md` Rule 3) → advance to next sibling node. No transition preamble, no recap of the prior node — the next turn opens with Node N+1's chunk directly. (This is where v1.1 broke — see `tests/TC2-no-overstay.md`.)
    - **No** / "don't understand" → spawn child sub-branch. Announce aloud: *"Opening Node N.1 — same idea, simpler scope: `<focus>`."* Emit the child's big-picture chunk under the same chunk contract. After the child resolves with Yes, announce *"Closing Node N.1. Back to Node N+1."* then emit Node N+1's chunk.
    - **Branch deeper** / specification request on the current node's topic → spawn child sub-branch Node N.k with deeper focus. Announce *"Opening Node N.k — `<topic>`."* on descent and *"Closing Node N.k. Back to Node N+1."* on return. Same chunk contract inside the child.
-   - **Off-topic question** (NOT a deeper-focus request on the current node — those always spawn a named child per the previous bullet) → note as an aside, then return to the planned next sibling.
+   - **Off-topic question** → note as a labeled inline aside (one sentence: *"Aside: `<answer>`. Back to Node N."*), then return to the planned next sibling. *On-topic vs off-topic test:* a question is on-topic (and therefore spawns a named child per the previous bullet) if and only if answering it requires explaining a sub-component, mechanism, or term that was mentioned or implied in the current node's chunk. A question introducing a concept not referenced in the current chunk is off-topic. When in doubt, emit the one-sentence aside and continue — do not spawn a child for tangential associations.
 
 ## Phase 5 — Synthesis Chunk
 
@@ -79,11 +83,13 @@ After the last sibling node's "yes", emit ONE synthesis chunk:
   - **"Re-walk Node `<N>` — `<predicted-weakest-node>`"** — pick the node where the user lingered longest, spawned the most child branches, or hesitated most on Yes
   - **"Other / specify"**
 
-On **Re-walk Node N** → spawn a child branch on Node N with simpler scope. On **No** → re-emit the synthesis chunk with a different integrating visual.
+On **Re-walk Node N** → spawn a child branch on Node N with simpler scope. **A given node may be re-walked at most once.** On a second re-walk request for the same node, fire `AskUserQuestion`: *"Node N has already been re-walked. Pick: (a) mark lesson complete, (b) specify a concrete remaining question, (c) Other / specify."*
+
+On **No** → re-emit the synthesis chunk with a different integrating visual. This is the **single authorized Rule 4 exception** (see `SKILL.md` Rule 4 — *Phase 5 synthesis exception*). If "No" fires a second time on the re-emitted synthesis, do NOT emit a third pass — automatically fire the Re-walk Node N path using the node the user lingered on longest.
 
 ## Session-Budget Guard
 
-Before emitting any chunk, count chunks emitted in this session. If count ≥ 15, halt and fire `AskUserQuestion`:
+Before emitting any chunk, count chunks emitted in this session. If count ≥ 15, halt and fire `AskUserQuestion`. **Exception:** if a child branch is currently open (an *"Opening Node N.k"* announcement has been emitted without a corresponding *"Closing Node N.k"*), allow one more chunk to close the branch BEFORE halting. Interrupting mid-open-branch is prohibited — it breaks the tree-topology contract.
 
 - **"Continue for `<estimated-remaining>` more chunks to finish the plan (Recommended)"** — estimate based on plan-tree remainder
 - **"Pause for break — resume on re-invocation"**
