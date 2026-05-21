@@ -27,8 +27,11 @@ For each node in order:
    - At least one non-prose visual element (see `references/visuals.md`)
    - Different visual pattern than the previous chunk
    - Zero unexplained jargon
-2. **Stop-and-check:**
-   > "Got it? Yes / No / Branch deeper?"
+2. **Stop-and-check gate** — fire `AskUserQuestion` per `SKILL.md` Rule 3 schema (same 4-option pattern as ceremony; same chunk-tailored prediction requirement):
+   - **"Yes — advance to Node N+1 (Recommended)"**
+   - **"No — `<predicted-confusion>`"** — chunk-specific, not generic
+   - **"Branch deeper — `<predicted-focus>`"** — chunk-specific, not generic
+   - **"Other / specify"**
 3. **Branch on response:**
    - **Yes** (or any affirmative token per `SKILL.md` Rule 3) → advance to next sibling, no preamble, no recap.
    - **No** → spawn child sub-branch Node N.1; announce *"Opening Node N.1 — `<focus>`."* Resolve, then announce *"Closing Node N.1. Back to Node N+1."*
@@ -40,9 +43,12 @@ If the user wants closure, emit a one-sentence + one-visual synthesis. If the us
 
 ## Session-Budget Guard
 
-Express mode max **5 chunks per express invocation** (lower than ceremony). The user picked express to be fast. If the lesson exceeds 5 chunks, ask:
+Express mode max **5 chunks per express invocation** (lower than ceremony). The user picked express to be fast. If the lesson exceeds 5 chunks, halt and fire `AskUserQuestion`:
 
-> "Express budget hit (5 chunks). Switch to ceremony for the rest, or stop here?"
+- **"Stop here — concept covered enough for express (Recommended)"**
+- **"Switch to ceremony for the remaining material"**
+- **"Extend express by 3 more chunks"**
+- **"Other / specify"**
 
 ## When to Refuse Express
 

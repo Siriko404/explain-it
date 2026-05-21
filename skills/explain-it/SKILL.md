@@ -57,9 +57,18 @@ Each node consumes exactly one chunk on its first pass. That chunk delivers the 
 *Operational test:* a learner should be able to paraphrase the chunk in one sentence without needing sub-detail to fill gaps. If sub-detail is load-bearing for comprehension, the child branch has been packed into the parent — split it out.
 
 **Rule 3 — Advance only on confirm; never overstay.**
-After each chunk: ask "Got it? Yes / No / Branch deeper?". On "yes" → advance to the next sibling node. On no answer → wait. Never continue on the same node uninvited. (This is the v1.1 failure mode — see `tests/TC1-TC3`.)
+After each chunk, fire an `AskUserQuestion` gate (the *stop-and-check gate*). On Yes → advance to the next sibling node. On any other answer → branch per Rule 4. Never continue on the same node uninvited. (This is the v1.1 failure mode — see `tests/TC1-TC3`.)
 
-*Affirmative tokens:* "yes", "y", "yep", "ok", "okay", "got it", "sure", "sounds good", a thumbs-up emoji, or any clear affirmative all count as Yes. Do not solicit a more elaborate confirmation. Do not preface the next chunk with a transition phrase or a recap of the prior node — open Node N+1's chunk directly.
+*Stop-and-check gate schema (mandatory 4 options, in this order):*
+
+1. **"Yes — advance to Node N+1 (Recommended)"** — substitute the actual node number.
+2. **"No — `<predicted-confusion-source>`"** — predict the single most likely confusion direction *from the chunk you just emitted* (the term, mechanism, or conceptual jump a typical learner would stumble on) and write it as the option text.
+3. **"Branch deeper — `<predicted-deeper-focus>`"** — predict the single most likely deeper-focus direction (the sub-detail, worked example, or related concept a typical learner would want to drill into) and write it as the option text.
+4. **"Other / specify"** — free-form fallback for branches the prediction missed.
+
+The predicted text in options 2 and 3 MUST be chunk-specific, not generic. **Bad:** *"No — too much jargon."* **Good:** *"No — the omitted-variable-bias formula lost me."* If you cannot name a specific confusion source, the chunk is too vague — rewrite the chunk before firing the gate.
+
+*Affirmative tokens (chat fallback only):* if the user types in chat instead of selecting a gate option, "yes", "y", "yep", "ok", "okay", "got it", "sure", "sounds good", a thumbs-up emoji, or any clear affirmative all count as Yes. Do not solicit a more elaborate confirmation. Do not preface the next chunk with a transition phrase or a recap of the prior node — open Node N+1's chunk directly.
 
 **Rule 4 — Confusion → spawn child sub-branch.**
 On "no" / "don't understand" / "explain more" / a specification request → open a child node (e.g., Node 2 → Node 2.1) with simpler scope or deeper focus. Do NOT rephrase in place. Resolve the child, then return to the parent's next sibling. Tree topology IS the determinism.
@@ -83,6 +92,8 @@ Every chunk includes at least one non-prose visual element (ASCII diagram, boxed
 | Define jargon with more jargon | Recursive failure | Plain words; if you can't, you don't understand it |
 | Switch analogies mid-topic | Fragments mental model | One analogy per topic |
 | Skip baseline check | Wastes a chunk on known material | Confirm baseline in scope interview |
+| Fire stop-and-check as plain text prompt | Loses the structured gate contract; user typing free-form breaks the deterministic walk | Rule 3 — every gate fires `AskUserQuestion` |
+| Generic gate options (*"No — too much jargon"*) | Forces user to type free-form anyway; defeats the AskUserQuestion gate | Rule 3 — predict chunk-specific confusion + branch-deeper options |
 
 ## Pedagogy Basis + Explicit Exclusions
 
@@ -119,6 +130,8 @@ If you find yourself doing any of these mid-session, halt and re-plan:
 - Skipping the plan tree because "the concept is short"
 - Repeating the same visual pattern across consecutive chunks
 - Defining a jargon term with another jargon term
+- Emitting stop-and-check as plain text instead of firing `AskUserQuestion`
+- AskUserQuestion options 2/3 contain generic placeholders ("too much jargon", "explain more") instead of chunk-specific predictions
 
 All of these mean: stop, return to the tree, fix the violation.
 

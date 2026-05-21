@@ -51,7 +51,7 @@ Expected behavior:
 1. Claude asks the seed question (*"What part of difference-in-differences do you understand least right now — A: definition, B: mechanics, C: when to use, D: other?"*)
 2. After your answer, Claude emits a 3-node plan tree
 3. Claude fires the plan-approval gate via `AskUserQuestion`
-4. On approval, Claude walks the tree one node per chunk, big-picture first, with a visual element each, asking "Got it? Yes / No / Branch deeper?" after each chunk
+4. On approval, Claude walks the tree one node per chunk, big-picture first, with a visual element each, firing an `AskUserQuestion` stop-and-check gate after each chunk with 4 chunk-tailored options: Yes (Recommended) / No — `<predicted-confusion>` / Branch deeper — `<predicted-focus>` / Other
 
 If any of these phases is skipped, the skill is not installed correctly — re-check the file paths above.
 

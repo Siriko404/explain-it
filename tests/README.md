@@ -27,3 +27,7 @@ Automated: dispatch a Claude subagent with each TC file as the input scenario an
 ## A note on example transcripts
 
 Example transcripts inside individual TC files (e.g., `"Closing Node 1.1. Back to plan — Node 2: the CAPM equation."` in TC6) illustrate richer wording a teacher might use in practice. The normative spec template lives in `skills/explain-it/SKILL.md` Rule 4: *"Closing Node N.k. Back to Node N+1."* Both are compliant — the TC examples just substitute the actual node title for readability.
+
+## A note on gate format
+
+TC user simulations often show the learner typing a free-form reply in chat (e.g., *"Yes, got it"* in TC1, *"I don't really understand"* in TC4). At runtime, the canonical gate is `AskUserQuestion` with 4 chunk-tailored options (see `SKILL.md` Rule 3). The user can either select an option from the gate or type free-form in chat — both must trigger the same downstream behavior. Free-form chat replies that match an affirmative token (per Rule 3) count as Yes; replies expressing confusion or specification requests count as the corresponding gate option. Tests assess the downstream behavior, not the input modality.

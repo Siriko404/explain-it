@@ -56,8 +56,11 @@ For each node in plan order:
    - Different visual pattern than the previous chunk
    - Zero unexplained jargon (define inline in plain words, or do not use the term)
    - **Pre-emission jargon check:** before sending the chunk, scan it once for technical terms. Each term not in everyday English MUST be defined inline in the same sentence, in plain words. If a term cannot be defined in plain words within the sentence budget, rewrite the sentence to avoid the term. This check is mandatory — sentence-budget pressure is the most common cause of jargon-rule violations at runtime.
-2. **Stop-and-check** with this exact prompt:
-   > "Got it? Yes / No / Branch deeper?"
+2. **Stop-and-check gate** — fire `AskUserQuestion` per `SKILL.md` Rule 3 schema. Options must be chunk-tailored:
+   - **"Yes — advance to Node N+1 (Recommended)"** — substitute actual node number
+   - **"No — `<predicted-confusion-source>`"** — predict the single most likely confusion direction *from the chunk you just emitted*. Chunk-specific, not generic.
+   - **"Branch deeper — `<predicted-deeper-focus>`"** — predict the single most likely deeper-focus direction. Chunk-specific, not generic.
+   - **"Other / specify"** — free-form fallback
 3. **Branch on response:**
    - **Yes** (or any affirmative token per `SKILL.md` Rule 3) → advance to next sibling node. No transition preamble, no recap of the prior node — the next turn opens with Node N+1's chunk directly. (This is where v1.1 broke — see `tests/TC2-no-overstay.md`.)
    - **No** / "don't understand" → spawn child sub-branch. Announce aloud: *"Opening Node N.1 — same idea, simpler scope: `<focus>`."* Emit the child's big-picture chunk under the same chunk contract. After the child resolves with Yes, announce *"Closing Node N.1. Back to Node N+1."* then emit Node N+1's chunk.
@@ -70,15 +73,22 @@ After the last sibling node's "yes", emit ONE synthesis chunk:
 
 - One sentence: *"Here's the whole picture together."*
 - One visual that integrates all nodes (typically a flow diagram or summary table)
-- Final stop-and-check: *"Does the whole picture click? Yes / No / Re-walk a node?"*
+- **Final stop-and-check gate** — fire `AskUserQuestion`:
+  - **"Yes — whole picture clicks, lesson complete (Recommended)"**
+  - **"No — the synthesis didn't tie it together; re-walk the synthesis chunk"**
+  - **"Re-walk Node `<N>` — `<predicted-weakest-node>`"** — pick the node where the user lingered longest, spawned the most child branches, or hesitated most on Yes
+  - **"Other / specify"**
 
-On **No** → ask which node to re-walk. On **Re-walk N** → spawn a child branch on Node N.
+On **Re-walk Node N** → spawn a child branch on Node N with simpler scope. On **No** → re-emit the synthesis chunk with a different integrating visual.
 
 ## Session-Budget Guard
 
-Before emitting any chunk, count chunks emitted in this session. If count ≥ 15, halt and ask:
+Before emitting any chunk, count chunks emitted in this session. If count ≥ 15, halt and fire `AskUserQuestion`:
 
-> "Approaching session budget (15 chunks). Continue, pause for break, or wrap up?"
+- **"Continue for `<estimated-remaining>` more chunks to finish the plan (Recommended)"** — estimate based on plan-tree remainder
+- **"Pause for break — resume on re-invocation"**
+- **"Wrap up now with synthesis chunk"**
+- **"Other / specify"**
 
 If the user has declined 2 chunks in a row ("stop", "skip", "not now"), suspend teaching and wait for re-invocation.
 
